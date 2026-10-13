@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BodhaAI – LLM Chat Platform</title>
+  <meta name="description" content="IntelliAI is an educational platform showing how a Large Language Model is integrated into a web app." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar">
+      <div class="brand">
+        <span class="logo">✦</span>
+        <div>
+          <h1>BodhaAI</h1>
+          <p>LLM Chat Platform</p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="newChatBtn">＋ New Chat</button>
+
+      <div class="history-label">Chat history</div>
+      <ul class="history" id="historyList"></ul>
+
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost" id="aboutBtn">ℹ️ About</button>
+        <button class="btn btn-ghost" id="themeBtn">🌙 Dark mode</button>
+      </div>
+    </aside>
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- Main chat area -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        <div class="topbar-title" id="chatTitle">New chat</div>
+        <button class="btn btn-ghost small" id="clearBtn">🗑 Clear Chat</button>
+      </header>
+
+      <div class="notice" id="setupNotice" hidden></div>
+
+      <section class="messages" id="messages" aria-live="polite"></section>
+
+      <footer class="composer">
+        <div class="composer-box">
+          <textarea id="input" rows="1" maxlength="2000"
+            placeholder="Ask IntelliAI anything… (Enter to send, Shift+Enter for new line)"></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send message">➤</button>
+        </div>
+        <div class="composer-hint"><span id="charCount">0</span>/2000 · AI can make mistakes. Verify important information.</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- About modal -->
+  <div class="modal" id="aboutModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+      <button class="icon-btn modal-close" id="aboutClose" aria-label="Close">✕</button>
+      <h2 id="aboutTitle">About IntelliAI</h2>
+
+      <h3>What is a Large Language Model?</h3>
+      <p>A Large Language Model (LLM) is an AI system trained on huge amounts of text. It learns patterns in language so it can predict the next word (token) in a sentence. By repeating this prediction, it can answer questions, summarize text, translate, write code and hold conversations.</p>
+
+      <h3>Purpose of this project</h3>
+      <p>IntelliAI is an educational project that shows how an LLM can be added to a real web application. It demonstrates a clean separation between a <strong>frontend</strong> (HTML, CSS, JavaScript) and a secure <strong>backend</strong> (Node.js + Express) that talks to the LLM provider.</p>
+
+      <h3>How it works</h3>
+      <ol>
+        <li>You type a message in the browser.</li>
+        <li>The frontend sends it to our backend at <code>/api/chat</code>.</li>
+        <li>The backend validates it, attaches the secret API key from an environment variable, and calls the LLM.</li>
+        <li>The reply travels back to the browser and appears as a chat bubble.</li>
+      </ol>
+
+      <h3>Security highlights</h3>
+      <ul>
+        <li>The API key is stored in <code>.env</code> and never sent to the browser.</li>
+        <li>Inputs are validated and rate-limited on the server.</li>
+        <li>Messages are escaped before display to prevent XSS.</li>
+      </ul>
+
+      <h3>Tech stack</h3>
+      <p>HTML5 · CSS3 · Vanilla JavaScript · Node.js · Express · OpenAI API · Vercel</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
